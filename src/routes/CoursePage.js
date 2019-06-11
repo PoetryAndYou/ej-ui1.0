@@ -11,7 +11,7 @@ class CoursePage extends React.Component {
             list:[]
         }
     }
-
+//xdxffxxfdxsx
     componentDidMount(){
         this.handleLoad();
     }
