@@ -2,6 +2,8 @@ import React from 'react';
 import axios from '../utils/axios'
 import {Table,Button,message} from 'antd'
 
+
+//123456
 class CoursePage extends React.Component {
     constructor(){
         super();
