@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from '../utils/axios'
-import {Table,Button,message} from 'antd'
+import {Table,Modal,Button,message} from 'antd'
 
 
 //123456
