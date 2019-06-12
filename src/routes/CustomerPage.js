@@ -28,7 +28,7 @@ class CustomerPage extends React.Component {
   // 重载数据
   reloadData(){
     this.setState({loading:true});
-    axios.get("/customer/findAllCustomer")
+    axios.get("/customer/findAll")
     .then((result)=>{
       // 将查询数据更新到state中
       this.setState({list:result.data})
@@ -85,7 +85,7 @@ class CustomerPage extends React.Component {
         return;
       }
       // 表单校验完成后与后台通信进行保存
-      axios.post("/customer/saveOrUpdate",values)
+      axios.post("/customer/saveOrupdate",values)
       .then((result)=>{
         message.success(result.statusText)
         // 重置表单
