@@ -78,7 +78,7 @@ class AddressPage extends React.Component {
             if (err) {
                 return;
             }
-            axios.post("/address/saveOrUpdate", values)
+            axios.post("/address/saveOrupdate", values)
                 .then((result) => {
                     message.success(result.statusText)
                     //重置表单

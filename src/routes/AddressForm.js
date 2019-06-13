@@ -44,6 +44,11 @@ class AddressForm extends React.Component {
                             rules: [{ required: true, message: '请输入所在乡/镇/区!' }],
                         })(<Input />)}
                     </Form.Item>
+                    <Form.Item label="地址">
+                        {getFieldDecorator('address', {
+                            rules: [{ required: true, message: '请输入所在详细地址!' }],
+                        })(<Input />)}
+                    </Form.Item>
                     <Form.Item label="联系电话">
                         {getFieldDecorator('telephone', {
                             rules: [{ required: true, message: '请输入联系电话！' }],
