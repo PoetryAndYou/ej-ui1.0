@@ -14,7 +14,7 @@ class CategoryForm extends React.Component {
         sm: { span: 16 },
       },
     }
-    // 父组件传递给子组件值
+    // 父组件传递给子组件值地方
     const { visible, onCancel, onCreate, form } = this.props;
     const { getFieldDecorator } = form;
     // 将表单中没有出现的值做一个双向数据绑定
