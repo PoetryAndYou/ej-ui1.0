@@ -1,4 +1,4 @@
-import React from 'react';
+ import React from 'react';
 import {Form,Modal,Input} from 'antd'
 
 class CustomerForm extends React.Component {
