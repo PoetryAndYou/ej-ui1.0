@@ -19,7 +19,6 @@ function RouterConfig({ history }) {
         <Route path="/order" exact component={OrderPage} />
         <Route path="/category" exact component={CategoryPage} />
         <Route path="/comment" exact component={CommentPage} />
-        <Route path="/orderLine" exact component={OrderLinePage} />
         <Route path="/produce" exact component={ProducePage} />
         <Route path="/waiter" exact component={WaiterPage} />
       </Switch>
