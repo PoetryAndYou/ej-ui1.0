@@ -47,7 +47,7 @@ class ProductForm extends React.Component {
             </Form.Item>
             <Form.Item label="状态">
               {getFieldDecorator('status', {
-                rules: [{ required: true, message: '请输入价格!' }],
+                rules: [{ required: true, message: '请输入状态!' }],
               })(<Input />)}
             </Form.Item>
           </Form>
