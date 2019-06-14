@@ -1,7 +1,7 @@
 import React from 'react';
 import {Form,Modal,Input} from 'antd'
 
-class ProduceForm extends React.Component {
+class ProductForm extends React.Component {
 
   render(){
     const formLayout = {
@@ -30,22 +30,26 @@ class ProduceForm extends React.Component {
           onOk={onCreate}
         >
           <Form layout="vertical" {...formLayout}>
-            <Form.Item label="产品名" >
+            <Form.Item label="名称" >
               {getFieldDecorator('name', {
                 rules: [{ required: true, message: '请输入产品名!' }],
               })(<Input />)}
             </Form.Item>
-            <Form.Item label="类别" >
+            <Form.Item label="描述" >
               {getFieldDecorator('description', {
                 rules: [{ required: true, message: '请输入类别!' }],
               })(<Input />)}
             </Form.Item>
-            <Form.Item label="价格">
+            <Form.Item label="单价">
               {getFieldDecorator('price', {
                 rules: [{ required: true, message: '请输入价格!' }],
               })(<Input />)}
             </Form.Item>
-           
+            <Form.Item label="状态">
+              {getFieldDecorator('status', {
+                rules: [{ required: true, message: '请输入价格!' }],
+              })(<Input />)}
+            </Form.Item>
           </Form>
         </Modal>
     );
@@ -63,4 +67,4 @@ const mapPropsToFields = (props)=>{
 
 export default Form.create({
   mapPropsToFields
-})(ProduceForm);
+})(ProductForm);

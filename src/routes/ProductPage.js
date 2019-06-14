@@ -1,14 +1,14 @@
 import React from 'react';
 // 引入css进行页面美化
-import styles from './ProducePage.css'
+import styles from './ProductPage.css'
 // 导入组件
 import {Modal,Button, Table,message} from 'antd'
 import axios from '../utils/axios'
-import ProduceForm from './ProduceForm'
+import ProductForm from './ProductForm'
 
 
 // 组件类必须要继承React.Component，是一个模块，顾客管理子功能
-class ProducePage extends React.Component {
+class ProductPage extends React.Component {
   // 局部状态state
   constructor(){
     super();
@@ -17,7 +17,7 @@ class ProducePage extends React.Component {
       list:[],
       loading:false,
       visible:false,
-      produce:{}
+      product:{}
     }
   }
   // 在生命周期钩子函数中调用重载数据
@@ -28,7 +28,7 @@ class ProducePage extends React.Component {
   // 重载数据
   reloadData(){
     this.setState({loading:true});
-    axios.get("/produce/findAll")
+    axios.get("/product/findALLPro")
     .then((result)=>{
       // 将查询数据更新到state中
       this.setState({list:result.data})
@@ -43,7 +43,7 @@ class ProducePage extends React.Component {
       title: '确定删除这些记录吗?',
       content: '删除后数据将无法恢复',
       onOk:() => {
-        axios.post("/produce/batchDelete",{ids:this.state.ids})
+        axios.post("/product/batchDeletion",{ids:this.state.ids})
         .then((result)=>{
           //批量删除后重载数据
           message.success(result.statusText)
@@ -60,7 +60,7 @@ class ProducePage extends React.Component {
       content: '删除后数据将无法恢复',
       onOk:() => {
         // 删除操作
-        axios.get("/produce/deleteById",{
+        axios.get("/product/deleteById",{
           params:{
             id:id
           }
@@ -85,7 +85,7 @@ class ProducePage extends React.Component {
         return;
       }
       // 表单校验完成后与后台通信进行保存
-      axios.post("/produce/saveOrupdate",values)
+      axios.post("/product/saveOrupdate",values)
       .then((result)=>{
         message.success(result.statusText)
         // 重置表单
@@ -104,12 +104,12 @@ class ProducePage extends React.Component {
   // 去添加
   toAdd(){
     // 将默认值置空,模态框打开
-    this.setState({produce:{},visible:true})
+    this.setState({product:{},visible:true})
   }
   // 去更新
   toEdit(record){
     // 更前先先把要更新的数据设置到state中
-    this.setState({produce:record})
+    this.setState({product:record})
     // 将record值绑定表单中
     this.setState({visible:true})
   }
@@ -118,11 +118,15 @@ class ProducePage extends React.Component {
   render(){
     // 变量定义
     let columns = [{
-      title:'产品名',
+      title:'名称',
       dataIndex:'name'
     },{
-      title:'类别',
+      title:'描述',
       dataIndex:'description'
+    },{
+    title:'单价',
+    width:60,
+    dataIndex:'price'
     },{
       title:'状态',
       align:"center",
@@ -155,7 +159,7 @@ class ProducePage extends React.Component {
     
     // 返回结果 jsx(js + xml)
     return (
-      <div className={styles.produce}>
+      <div className={styles.product}>
         <div className={styles.title}>产品管理</div>
         <div className={styles.btns}>
           <Button onClick={this.toAdd.bind(this)}>添加</Button> &nbsp;
@@ -171,8 +175,8 @@ class ProducePage extends React.Component {
           columns={columns}
           dataSource={this.state.list}/>
 
-        <ProduceForm
-          initData={this.state.produce}
+        <ProductForm
+          initData={this.state.product}
           wrappedComponentRef={this.saveFormRef}
           visible={this.state.visible}
           onCancel={this.handleCancel}
@@ -182,4 +186,4 @@ class ProducePage extends React.Component {
   }
 }
 
-export default ProducePage;
+export default ProductPage;
