@@ -14,6 +14,8 @@ function RouterConfig({ history }) {
   return (
     <Router history={history}>
       <div className={styles.container}>
+
+        
           <div className={styles["left-nav"]}>
             <div className={styles.title}>E洁家政管理系统</div>
             <ul>
