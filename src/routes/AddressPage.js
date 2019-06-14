@@ -14,7 +14,7 @@ class AddressPage extends React.Component {
             list: [],
             loading: false,
             visible: false,
-            address: {}
+            address:{}
         }
     }
     // 在生命周期钩子函数中调用重载数据
@@ -78,7 +78,7 @@ class AddressPage extends React.Component {
             if (err) {
                 return;
             }
-            axios.post("/address/saveOrupdate", values)
+            axios.post("/address/saveOrupdate",values)
                 .then((result) => {
                     message.success(result.statusText)
                     //重置表单
@@ -100,11 +100,11 @@ class AddressPage extends React.Component {
     }
     //去更新
     toEdit(record) {
-        //更新前先要把要更新的数据设置到state中
+        // 更前先先把要更新的数据设置到state中
         this.setState({ address: record })
-        //将record值绑定表单中
+        // 将record值绑定表单中
         this.setState({ visible: true })
-    }
+      }
 
     //组件类务必要重写的方法，表示页面渲染
     render() {
@@ -134,7 +134,7 @@ class AddressPage extends React.Component {
                 return (
                     <div>
                         <Button type='link' size="small" onClick={this.handleDelete.bind(this, record.id)}>删除</Button>
-                        <Button type='link' size="small" onClick={this.toEdit.bind(this.record)}>修改</Button>
+                        <Button type='link' size="small" onClick={this.toEdit.bind(this,record)}>修改</Button>
                     </div>
                 )
             }
@@ -152,7 +152,7 @@ class AddressPage extends React.Component {
             }),
         };
         //返回结果 jsx(js+xml)
-        return (
+        return ( 
             <div className={styles.address}>
                 <div className={styles.title}>地址管理</div>
                 <div className={styles.btns}>
@@ -168,13 +168,12 @@ class AddressPage extends React.Component {
                     rowSelection={rowSelection}
                     columns={columns}
                     dataSource={this.state.list} />
-
-                <AddressForm
-                    initData={this.state.address}
-                    wrappedComponentRef={this.saveFormRef}
-                    visible={this.state.visible}
-                    onCancel={this.handleCancel}
-                    onCreate={this.handleCreate} />
+        <AddressForm
+          initData={this.state.address}
+          wrappedComponentRef={this.saveFormRef}
+          visible={this.state.visible}
+          onCancel={this.handleCancel}
+          onCreate={this.handleCreate}/>
             </div>
         )
     }

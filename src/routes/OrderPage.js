@@ -18,7 +18,6 @@ class OrderPage extends React.Component {
       loading:false,
       visible:false,
       order:{}
-      customer:{}
     }
   }
   // 在生命周期钩子函数中调用重载数据
@@ -38,17 +37,7 @@ class OrderPage extends React.Component {
         this.setState({loading:false});
       })
     }
-  reloadData(){
-    this.setState({loading:true});
-    axios.get("/order/findAll")
-    .then((result)=>{
-      // 将查询数据更新到state中
-      this.setState({list:result.data})
-    })
-    .finally(()=>{
-      this.setState({loading:false});
-    })
-  }
+ 
   // 批量删除
   handleBatchDelete(){
     Modal.confirm({
@@ -56,7 +45,6 @@ class OrderPage extends React.Component {
       content: '删除后数据将无法恢复',
       onOk:() => {
         axios.post("/order/batchDelete",{ids:this.state.ids})
-        axios.post("/order/batchDeletion",{ids:this.state.ids})
         .then((result)=>{
           //批量删除后重载数据
           message.success(result.statusText)
