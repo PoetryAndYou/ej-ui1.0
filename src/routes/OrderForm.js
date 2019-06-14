@@ -18,6 +18,7 @@ class OrderForm extends React.Component {
     const { visible, onCancel, onCreate, form } = this.props;
     const { getFieldDecorator } = form;
     // 将表单中没有出现的值做一个双向数据绑定ss
+    // 将表单中没有出现的值做一个双向数据绑定sshj
     getFieldDecorator("id");
     getFieldDecorator("status");
     getFieldDecorator("photo");
@@ -32,6 +33,7 @@ class OrderForm extends React.Component {
           <Form layout="vertical" {...formLayout}>
             <Form.Item label="订单时间" >
               {getFieldDecorator('orderTime', {
+              {getFieldDecorator('order_time', {
                 rules: [{ required: true, message: '请输入订单时间!' }],
               })(<Input />)}
             </Form.Item>
@@ -46,6 +48,7 @@ class OrderForm extends React.Component {
     }
   }
   // 将通过props从父组件中获取的值拿出来设置到表单元素上
+  // 将通过props从父组件中获取的值拿出来设置到表单元素上gg
   const mapPropsToFields = (props)=>{
     let obj = {};
     for(let key in props.initData){
@@ -57,3 +60,7 @@ class OrderForm extends React.Component {
   export default Form.create({
     mapPropsToFields
   })(OrderForm);
+  
+  export default Form.create({
+    mapPropsToFields
+  })(OrderForm); 
