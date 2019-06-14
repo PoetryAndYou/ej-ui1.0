@@ -1,7 +1,7 @@
 import React from 'react';
 import {Form,Modal,Input} from 'antd'
 
-class CategoryForm extends React.Component {
+class WaiterForm extends React.Component {
 
   render(){
     const formLayout = {
@@ -14,31 +14,43 @@ class CategoryForm extends React.Component {
         sm: { span: 16 },
       },
     }
-    // 父组件传递给子组件值地方
+    // 父组件传递给子组件值
     const { visible, onCancel, onCreate, form } = this.props;
     const { getFieldDecorator } = form;
     // 将表单中没有出现的值做一个双向数据绑定
     getFieldDecorator("id");
-    getFieldDecorator("name");
-    getFieldDecorator("num");
+    getFieldDecorator("status");
+    getFieldDecorator("photo");
+    getFieldDecorator("idcard");
+    getFieldDecorator("password");
     return (
       <Modal
           visible={visible}
-          title="添加衣服信息"
+          title="添加服务员信息"
           okText="提交"
           onCancel={onCancel}
           onOk={onCreate}
         >
           <Form layout="vertical" {...formLayout}>
-            <Form.Item label="类别" >
-              {getFieldDecorator('name', {
-                rules: [{ required: true, message: '请输入类别!' }],
+            <Form.Item label="姓名" >
+              {getFieldDecorator('realname', {
+                rules: [{ required: true, message: '请输入姓名!' }],
               })(<Input />)}
             </Form.Item>
-            <Form.Item label="数量" >
-              {getFieldDecorator('num', {
-                rules: [{ required: true, message: '请输入数量!' }],
+            <Form.Item label="手机号" >
+              {getFieldDecorator('telephone', {
+                rules: [{ required: true, message: '请输入手机号!' }],
               })(<Input />)}
+            </Form.Item>
+            <Form.Item label="身份证号" >
+              {getFieldDecorator('idcard', {
+                rules: [{ required: true, message: '请输入身份证号!' }],
+              })(<Input />)}
+            </Form.Item>
+            <Form.Item label="状态">
+              {getFieldDecorator('status', {
+                rules: [{ required: true, message: '请输入状态!' }],
+              })(<Input/>)}
             </Form.Item>
            
           </Form>
@@ -58,4 +70,4 @@ const mapPropsToFields = (props)=>{
 
 export default Form.create({
   mapPropsToFields
-})(CategoryForm);
+})(WaiterForm);

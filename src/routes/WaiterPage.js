@@ -1,14 +1,14 @@
 import React from 'react';
 // 引入css进行页面美化
-import styles from './OrderPage.css'
+import styles from './WaiterPage.css'
 // 导入组件
 import {Modal,Button, Table,message} from 'antd'
 import axios from '../utils/axios'
-import OrderForm from './OrderForm'
+import WaiterForm from './WaiterForm'
 
 
 // 组件类必须要继承React.Component，是一个模块，顾客管理子功能
-class OrderPage extends React.Component {
+class WaiterPage extends React.Component {
   // 局部状态state
   constructor(){
     super();
@@ -17,7 +17,6 @@ class OrderPage extends React.Component {
       list:[],
       loading:false,
       visible:false,
-      order:{}
       customer:{}
     }
   }
@@ -27,20 +26,9 @@ class OrderPage extends React.Component {
   }
 
   // 重载数据
-    reloadData(){
-      this.setState({loading:true});
-      axios.get("/order/findAll")
-      .then((result)=>{
-        // 将查询数据更新到state中
-        this.setState({list:result.data})
-      })
-      .finally(()=>{
-        this.setState({loading:false});
-      })
-    }
   reloadData(){
     this.setState({loading:true});
-    axios.get("/order/findAll")
+    axios.get("/waiter/findAll")
     .then((result)=>{
       // 将查询数据更新到state中
       this.setState({list:result.data})
@@ -55,8 +43,7 @@ class OrderPage extends React.Component {
       title: '确定删除这些记录吗?',
       content: '删除后数据将无法恢复',
       onOk:() => {
-        axios.post("/order/batchDelete",{ids:this.state.ids})
-        axios.post("/order/batchDeletion",{ids:this.state.ids})
+        axios.post("/waiter/batchDelete",{ids:this.state.ids})
         .then((result)=>{
           //批量删除后重载数据
           message.success(result.statusText)
@@ -73,7 +60,7 @@ class OrderPage extends React.Component {
       content: '删除后数据将无法恢复',
       onOk:() => {
         // 删除操作
-        axios.get("/order/deleteById",{
+        axios.get("/waiter/deleteById",{
           params:{
             id:id
           }
@@ -98,7 +85,7 @@ class OrderPage extends React.Component {
         return;
       }
       // 表单校验完成后与后台通信进行保存
-      axios.post("/order/saveOrupdate",values)
+      axios.post("/waiter/saveOrupdate",values)
       .then((result)=>{
         message.success(result.statusText)
         // 重置表单
@@ -117,12 +104,12 @@ class OrderPage extends React.Component {
   // 去添加
   toAdd(){
     // 将默认值置空,模态框打开
-    this.setState({order:{},visible:true})
+    this.setState({waiter:{},visible:true})
   }
   // 去更新
   toEdit(record){
     // 更前先先把要更新的数据设置到state中
-    this.setState({order:record})
+    this.setState({waiter:record})
     // 将record值绑定表单中
     this.setState({visible:true})
   }
@@ -131,11 +118,18 @@ class OrderPage extends React.Component {
   render(){
     // 变量定义
     let columns = [{
-      title:'下单时间',
-      dataIndex:'orderTime'
+      title:'姓名',
+      dataIndex:'realname'
     },{
-      title:'数目',
-      dataIndex:'total'
+      title:'手机号',
+      dataIndex:'telephone'
+    },{
+        title:'卡号',
+        dataIndex:'idcard'
+      },{
+      title:'状态',
+      align:"center",
+      dataIndex:'status'
     },{
       title:'操作',
       width:120,
@@ -164,8 +158,8 @@ class OrderPage extends React.Component {
     
     // 返回结果 jsx(js + xml)
     return (
-      <div className={styles.order}>
-        <div className={styles.title}>订单管理</div>
+      <div className={styles.waiter}>
+        <div className={styles.title}>服务员管理</div>
         <div className={styles.btns}>
           <Button onClick={this.toAdd.bind(this)}>添加</Button> &nbsp;
           <Button onClick={this.handleBatchDelete.bind(this)}>批量删除</Button> &nbsp;
@@ -180,8 +174,8 @@ class OrderPage extends React.Component {
           columns={columns}
           dataSource={this.state.list}/>
 
-        <OrderForm
-          initData={this.state.order}
+        <WaiterForm
+          initData={this.state.waiter}
           wrappedComponentRef={this.saveFormRef}
           visible={this.state.visible}
           onCancel={this.handleCancel}
@@ -191,4 +185,4 @@ class OrderPage extends React.Component {
   }
 }
 
-export default OrderPage;
+export default WaiterPage;
