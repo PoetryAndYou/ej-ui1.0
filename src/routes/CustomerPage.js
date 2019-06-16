@@ -101,6 +101,14 @@ class CustomerPage extends React.Component {
   saveFormRef = formRef => {
     this.formRef = formRef;
   };
+  //详情
+  toDetails(record){
+    console.log(record);
+    //跳转
+    this.props.history.push("/customerDetails");
+    //<Link to={"/customerDetails`}>{val.title}</Link>
+  }
+
   // 去添加
   toAdd(){
     // 将默认值置空,模态框打开
@@ -129,13 +137,14 @@ class CustomerPage extends React.Component {
       dataIndex:'status'
     },{
       title:'操作',
-      width:120,
+      width:180,
       align:"center",
       render:(text,record)=>{
         return (
           <div>
             <Button type='link' size="small" onClick={this.handleDelete.bind(this,record.id)}>删除</Button>
             <Button type='link' size="small" onClick={this.toEdit.bind(this,record)}>修改</Button>
+            <Button type='link' size="small" onClick={this.toDetails.bind(this,record)}>详情</Button>
           </div>
         )
       }

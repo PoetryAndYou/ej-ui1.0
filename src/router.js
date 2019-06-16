@@ -9,6 +9,7 @@ import CommentPage from './routes/CommentPage'
 import WaiterPage from './routes/WaiterPage'
 import AddressPage from './routes/AddressPage'
 import ProductPage from './routes/ProductPage'
+import CustomerDetails from './routes/CustomerDetails'
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 
 function RouterConfig({ history } ) {
@@ -66,7 +67,7 @@ const { Header, Content, Sider } = Layout;
         </Menu.Item>
         <Menu.Item key="7">
           <Icon type="user" />
-          <span className="nav-text"><Link to="/product">服务管理</Link></span>
+          <span className="nav-text"><Link to="/product">产品管理</Link></span>
         </Menu.Item>
         </Menu>
       </Sider>
@@ -94,6 +95,7 @@ const { Header, Content, Sider } = Layout;
         <Route path="/waiter" exact component={WaiterPage} />
         <Route path="/address" exact component={AddressPage} />
         <Route path="/product" exact component={ProductPage} />
+        <Route path="/customerDetails" exact component={CustomerDetails} />
 </Switch>
         
         </Content>
