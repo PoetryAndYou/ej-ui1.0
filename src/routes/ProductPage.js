@@ -113,33 +113,46 @@ class ProductPage extends React.Component {
     // 将record值绑定表单中
     this.setState({ visible: true })
   }
-
+  toDetails(record){
+    console.log(record);
+    //跳转
+    this.props.history.push("/productDetails")
+  }
   // 组件类务必要重写的方法，表示页面渲染
   render() {
     // 变量定义
     let columns = [{
       title: '名称',
+      align:"center",
       dataIndex: 'name'
+     
     }, {
       title: '描述',
+      align:"center",
       dataIndex: 'description'
     }, {
       title: '单价',
-      width: 60,
+      align:"center",
       dataIndex: 'price'
     }, {
-      title: '状态',
+      title: '图片',
       align: "center",
-      dataIndex: 'status'
+      dataIndex: 'photo',
+      render(text){
+        return (
+          <img width={40} height={40} src={"http://134.175.154.93:8888/group1/"+text}/>
+        )
+      }
     }, {
       title: '操作',
-      width: 120,
+      width: 200,
       align: "center",
       render: (text, record) => {
         return (
           <div>
             <Button type='link' size="small" onClick={this.handleDelete.bind(this, record.id)}>删除</Button>
             <Button type='link' size="small" onClick={this.toEdit.bind(this, record)}>修改</Button>
+            <Button type='link' size="small" onClick={this.toDetails.bind(this,record)}>详情</Button>
           </div>
         )
       }
