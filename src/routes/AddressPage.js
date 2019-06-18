@@ -1,7 +1,7 @@
 import React from 'react';
 //引入css进行页面美化
 import styles from './AddressPage.css'
-import { Modal, Button, Table, message } from 'antd'
+import { Modal, Button, Table, message, Input } from 'antd'
 import axios from '../utils/axios'
 import AddressForm from './AddressForm'
 
@@ -14,7 +14,7 @@ class AddressPage extends React.Component {
             list: [],
             loading: false,
             visible: false,
-            address:{}
+            address: {}
         }
     }
     // 在生命周期钩子函数中调用重载数据
@@ -78,7 +78,7 @@ class AddressPage extends React.Component {
             if (err) {
                 return;
             }
-            axios.post("/address/saveOrupdate",values)
+            axios.post("/address/saveOrupdate", values)
                 .then((result) => {
                     message.success(result.statusText)
                     //重置表单
@@ -104,7 +104,25 @@ class AddressPage extends React.Component {
         this.setState({ address: record })
         // 将record值绑定表单中
         this.setState({ visible: true })
-      }
+    }
+    toDetails(record) {
+        console.log(record);
+        this.props.history.push("AddressDetails");
+    }
+    query = (value) => {
+        this.setState({ loading: true });
+        axios.get("http://localhost:8888/address/query", {
+            params: {
+                telephone: value,
+            }
+        })
+            .then((result) => {
+                this.setState({ list: result.data })
+            })
+            .finally(() => {
+                this.setState({ loading: false });
+            })
+    }
 
     //组件类务必要重写的方法，表示页面渲染
     render() {
@@ -134,7 +152,7 @@ class AddressPage extends React.Component {
                 return (
                     <div>
                         <Button type='link' size="small" onClick={this.handleDelete.bind(this, record.id)}>删除</Button>
-                        <Button type='link' size="small" onClick={this.toEdit.bind(this,record)}>修改</Button>
+                        <Button type='link' size="small" onClick={this.toEdit.bind(this, record)}>修改</Button>
                     </div>
                 )
             }
@@ -151,10 +169,16 @@ class AddressPage extends React.Component {
                 name: record.name,
             }),
         };
+        //搜索框
+        const Search = Input.Search;
         //返回结果 jsx(js+xml)
-        return ( 
+        return (
             <div className={styles.address}>
-                <div className={styles.title}>地址管理</div>
+                <div className={styles.title}>地址管理
+                <div className={styles.search} >
+                        <Search placeholder="input search text" onSearch={value => { this.query(value) }} enterButton />
+                    </div>
+                </div>
                 <div className={styles.btns}>
                     <Button onClick={this.toAdd.bind(this)}>添加</Button> &nbsp;
                     <Button onClick={this.handleBatchDelete.bind(this)}>批量删除</Button> &nbsp;
@@ -168,12 +192,12 @@ class AddressPage extends React.Component {
                     rowSelection={rowSelection}
                     columns={columns}
                     dataSource={this.state.list} />
-        <AddressForm
-          initData={this.state.address}
-          wrappedComponentRef={this.saveFormRef}
-          visible={this.state.visible}
-          onCancel={this.handleCancel}
-          onCreate={this.handleCreate}/>
+                <AddressForm
+                    initData={this.state.address}
+                    wrappedComponentRef={this.saveFormRef}
+                    visible={this.state.visible}
+                    onCancel={this.handleCancel}
+                    onCreate={this.handleCreate} />
             </div>
         )
     }

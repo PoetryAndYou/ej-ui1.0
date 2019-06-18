@@ -10,7 +10,8 @@ import WaiterPage from './routes/WaiterPage'
 import AddressPage from './routes/AddressPage'
 import ProductPage from './routes/ProductPage'
 import CustomerDetails from './routes/CustomerDetails'
-import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+// import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+import { Layout, Menu, Icon } from 'antd';
 
 function RouterConfig({ history } ) {
   //const { SubMenu } = Menu;
@@ -72,11 +73,11 @@ const { Header, Content, Sider } = Layout;
         </Menu>
       </Sider>
       <Layout style={{ padding: '0 24px 24px' }}>
-        <Breadcrumb style={{ margin: '16px 0' }}>
+        {/* <Breadcrumb style={{ margin: '16px 0' }}>
           <Breadcrumb.Item>Home</Breadcrumb.Item>
           <Breadcrumb.Item>List</Breadcrumb.Item>
           <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb>
+        </Breadcrumb> */}
         <Content
           style={{
             background: '#fff',
@@ -96,7 +97,7 @@ const { Header, Content, Sider } = Layout;
         <Route path="/address" exact component={AddressPage} />
         <Route path="/product" exact component={ProductPage} />
         <Route path="/customerDetails" exact component={CustomerDetails} />
-</Switch>
+      </Switch>
         
         </Content>
       </Layout>
