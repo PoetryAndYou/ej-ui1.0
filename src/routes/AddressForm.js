@@ -4,7 +4,7 @@ import { Form, Modal, Input } from 'antd'
 class AddressForm extends React.Component {
 
     render() {
-        const formLayout = {
+        let formLayout = {
             labelCol: {
                 xs: { span: 24 },
                 sm: { span: 6 },

@@ -105,8 +105,10 @@ class CustomerPage extends React.Component {
   toDetails(record){
     console.log(record);
     //跳转
-    this.props.history.push("/customerDetails");
-    //<Link to={"/customerDetails`}>{val.title}</Link>
+    this.props.history.push({
+      pathname:"/customerDetails",
+      payload:record
+    });
   }
 
   // 去添加
