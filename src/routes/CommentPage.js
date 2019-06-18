@@ -118,7 +118,20 @@ class CommentPage extends React.Component {
     // 将record值绑定表单中
     this.setState({visible:true})
   }
-
+  query=(value)=>{
+    this.setState({loading:true});
+    axios.get("http://localhost:8888/comment/query",{
+      params:{
+        content:value,
+      }
+    })
+    .then((result)=>{
+      this.setState({list:result.data})
+    })
+    .finally(()=>{
+      this.setState({loading:false});
+    })
+  }
   // 组件类务必要重写的方法，表示页面渲染
   render(){
     // 变量定义
@@ -161,7 +174,7 @@ class CommentPage extends React.Component {
       <div className={styles.comment}>
         <div className={styles.title}>评论管理
         <div  className={styles.search} >
-           <Search placeholder="input search text" onSearch={value => {console.log(value)}} enterButton  />
+           <Search placeholder="input search text" onSearch={value => {this.query(value)}} enterButton  />
            </div>
         </div>
         <div className={styles.btns}>
