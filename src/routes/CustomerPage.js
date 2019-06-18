@@ -108,6 +108,24 @@ class CustomerPage extends React.Component {
     this.props.history.push("/customerDetails");
     //<Link to={"/customerDetails`}>{val.title}</Link>
   }
+  
+  query = (value)=>{
+    this.setState({loading:true});
+    axios.get("http://localhost:8888/customer/query",{
+      params:{
+        realname: value,
+       telephone: value,
+      }
+    })
+    .then((result)=>{
+      // 将查询数据更新到state中
+      this.setState({list:result.data})
+    })
+    .finally(()=>{
+      this.setState({loading:false});
+    })
+  }
+
 //搜索
   toEarch(record){
 alert(record);
@@ -175,7 +193,7 @@ alert(record);
         
         <div className={styles.title}>顾客管理
         <div  className={styles.search} >
-           <Search placeholder="input search text" onSearch={value => {console.log(value)}} enterButton  />
+           <Search placeholder="input search text" onSearch={value => {this.query(value)}} enterButton  />
            </div>
                </div>
         <div className={styles.btns}>
