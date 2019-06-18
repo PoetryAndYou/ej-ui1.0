@@ -101,6 +101,23 @@ class WaiterPage extends React.Component {
   saveFormRef = formRef => {
     this.formRef = formRef;
   };
+  query = (value)=>{
+    this.setState({loading:true});
+    axios.get("http://localhost:8888/waiter/query",{
+      params:{
+        realname: value,
+  
+      }
+    })
+    .then((result)=>{
+      // 将查询数据更新到state中
+      this.setState({list:result.data})
+    })
+    .finally(()=>{
+      this.setState({loading:false});
+    })
+  }
+
    //搜索
    toEarch(record){
     alert(record);
@@ -168,7 +185,7 @@ class WaiterPage extends React.Component {
       <div className={styles.waiter}>
         <div className={styles.title}>服务员管理
         <div  className={styles.search} >
-           <Search placeholder="input search text" onSearch={value => {console.log(value)}} enterButton  />
+           <Search placeholder="input search text" onSearch={value => {this.query(value)}} enterButton  />
            </div>
         </div>
         <div className={styles.btns}>
