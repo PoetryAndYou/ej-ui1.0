@@ -1,7 +1,7 @@
 import React from 'react';
 //引入css进行页面美化
 import styles from './AddressPage.css'
-import { Modal, Button, Table, message } from 'antd'
+import { Modal, Button, Table, message,Input } from 'antd'
 import axios from '../utils/axios'
 import AddressForm from './AddressForm'
 
@@ -151,10 +151,16 @@ class AddressPage extends React.Component {
                 name: record.name,
             }),
         };
+        //搜索框
+    const Search = Input.Search;
         //返回结果 jsx(js+xml)
         return ( 
             <div className={styles.address}>
-                <div className={styles.title}>地址管理</div>
+                <div className={styles.title}>地址管理
+                <div  className={styles.search} >
+           <Search placeholder="input search text" onSearch={value => {console.log(value)}} enterButton  />
+           </div>
+                </div>
                 <div className={styles.btns}>
                     <Button onClick={this.toAdd.bind(this)}>添加</Button> &nbsp;
                     <Button onClick={this.handleBatchDelete.bind(this)}>批量删除</Button> &nbsp;

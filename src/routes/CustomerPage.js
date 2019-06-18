@@ -2,7 +2,7 @@ import React from 'react';
 // 引入css进行页面美化
 import styles from './CustomerPage.css'
 // 导入组件
-import {Modal,Button, Table,message} from 'antd'
+import {Modal,Button, Table,message,Input} from 'antd'
 import axios from '../utils/axios'
 import CustomerForm from './CustomerForm'
 
@@ -108,7 +108,11 @@ class CustomerPage extends React.Component {
     this.props.history.push("/customerDetails");
     //<Link to={"/customerDetails`}>{val.title}</Link>
   }
+//搜索
+  toEarch(record){
+alert(record);
 
+  }
   // 去添加
   toAdd(){
     // 将默认值置空,模态框打开
@@ -161,11 +165,19 @@ class CustomerPage extends React.Component {
         name: record.name,
       }),
     };
-    
+        //搜索框
+        const Search = Input.Search;
+        
+
     // 返回结果 jsx(js + xml)
     return (
       <div className={styles.customer}>
-        <div className={styles.title}>顾客管理</div>
+        
+        <div className={styles.title}>顾客管理
+        <div  className={styles.search} >
+           <Search placeholder="input search text" onSearch={value => {console.log(value)}} enterButton  />
+           </div>
+               </div>
         <div className={styles.btns}>
           <Button onClick={this.toAdd.bind(this)}>添加</Button> &nbsp;
           <Button onClick={this.handleBatchDelete.bind(this)}>批量删除</Button> &nbsp;
