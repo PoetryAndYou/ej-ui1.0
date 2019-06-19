@@ -125,7 +125,7 @@ class OrderPage extends React.Component {
       title:'下单时间',
       dataIndex:'orderTime'
     },{
-      title:'数目',
+      title:'总价',
       dataIndex:'total'
     },{
       title:'操作',

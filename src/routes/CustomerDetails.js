@@ -112,7 +112,7 @@ class CustomerDetails extends React.Component {
         <Tabs defaultActiveKey="1" onChange={callback}>
           <TabPane tab="基本信息" key="1">
             <p> 顾客姓名 {this.state.customer.realname}</p>
-            <p> 电   话：{this.state.customer.telephone}</p>
+            <p> 电话：{this.state.customer.telephone}</p>
             <p> 密   码：{this.state.customer.password}</p>
             <p> 状   态：{this.state.customer.status}</p>
             <img alt="图片找不到..." src={this.state.customer.photo}/>

@@ -133,13 +133,14 @@ class ProductPage extends React.Component {
       dataIndex: 'status'
     }, {
       title: '操作',
-      width: 120,
+      width: 180,
       align: "center",
       render: (text, record) => {
         return (
           <div>
             <Button type='link' size="small" onClick={this.handleDelete.bind(this, record.id)}>删除</Button>
             <Button type='link' size="small" onClick={this.toEdit.bind(this, record)}>修改</Button>
+            {/* <Button type='link' size="small" onClick={this.toEdit.bind(this, record)}>查看评论</Button> */}
           </div>
         )
       }

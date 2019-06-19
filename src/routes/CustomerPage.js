@@ -116,7 +116,6 @@ class CustomerPage extends React.Component {
     axios.get("http://localhost:8888/customer/query",{
       params:{
         realname: value,
-       telephone: value,
       }
     })
     .then((result)=>{
