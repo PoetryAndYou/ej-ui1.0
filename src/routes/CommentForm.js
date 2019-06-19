@@ -40,7 +40,11 @@ class CommentForm extends React.Component {
                 rules: [{ required: true, message: '请输入评论时间!' }],
               })(<Input />)}
             </Form.Item>
-           
+            <Form.Item label="订单id" >
+              {getFieldDecorator('orderId', {
+                rules: [{ required: true, message: '请输入评论时间!' }],
+              })(<Input />)}
+            </Form.Item>
           </Form>
         </Modal>
     );
