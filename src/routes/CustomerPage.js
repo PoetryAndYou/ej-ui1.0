@@ -116,6 +116,10 @@ class CustomerPage extends React.Component {
     axios.get("http://localhost:8888/customer/query",{
       params:{
         realname: value,
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 7f0fb0f84375830cd1b1fa58601c3fe606b6ee35
       }
     })
     .then((result)=>{
@@ -130,7 +134,6 @@ class CustomerPage extends React.Component {
 //搜索
   toEarch(record){
 alert(record);
-
   }
   // 去添加
   toAdd(){

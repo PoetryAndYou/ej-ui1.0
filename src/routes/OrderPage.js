@@ -103,6 +103,38 @@ class OrderPage extends React.Component {
   saveFormRef = formRef => {
     this.formRef = formRef;
   };
+   //详情
+   toDetails(record){
+    console.log(record);
+    //跳转
+    this.props.history.push({
+      pathname:"/orderDetails",
+      payload:record
+    });
+  }
+  
+  query = (value)=>{
+    this.setState({loading:true});
+    axios.get("http://localhost:8888/order/query",{
+      params:{
+        realname: value,
+       telephone: value,
+      }
+    })
+    .then((result)=>{
+      // 将查询数据更新到state中
+      this.setState({list:result.data})
+    })
+    .finally(()=>{
+      this.setState({loading:false});
+    })
+  }
+
+//搜索
+  toEarch(record){
+    alert(record);
+    
+      }
   // 去添加
   toAdd(){
     // 将默认值置空,模态框打开
@@ -118,8 +150,6 @@ class OrderPage extends React.Component {
 
   // 组件类务必要重写的方法，表示页面渲染
   render(){
-    //搜索框
-    const Search = Input.Search;
     // 变量定义
     let columns = [{
       title:'下单时间',
@@ -152,16 +182,20 @@ class OrderPage extends React.Component {
         name: record.name,
       }),
     };
+
+    //搜索框
+    const Search = Input.Search;
+
     
     // 返回结果 jsx(js + xml)
     return (
-    
+
 
   <div className={styles.order}>
         <div className={styles.title}><div>订单管理</div>
         {/* sous */}
             <div  className={styles.search} >
-           <Search placeholder="input search text" onSearch={value => {console.log(value)}} enterButton />
+           <Search placeholder="input search text" onSearch={value => {this.query(value)}} enterButton />
            </div>
                
         </div>

@@ -28,7 +28,7 @@ class CategoryPage extends React.Component {
   // 重载数据
   reloadData(){
     this.setState({loading:true});
-    axios.get("/category/findAll")//?????????
+    axios.get("/category/findAll")
     .then((result)=>{
       // 将查询数据更新到state中
       this.setState({list:result.data})
@@ -101,6 +101,32 @@ class CategoryPage extends React.Component {
   saveFormRef = formRef => {
     this.formRef = formRef;
   };
+    //详情
+    toDetails(record){
+      console.log(record);
+      //跳转
+      this.props.history.push({
+        pathname:"/customerDetails",
+        payload:record
+      });
+    }
+
+    query = (value)=>{
+      this.setState({loading:true});
+      axios.get("http://localhost:8888/category/query",{
+        params:{
+          realname: value,
+         telephone: value,
+        }
+      })
+      .then((result)=>{
+        // 将查询数据更新到state中
+        this.setState({list:result.data})
+      })
+      .finally(()=>{
+        this.setState({loading:false});
+      })
+    }
   //搜索
   toEarch(record){
 alert(record);
