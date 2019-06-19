@@ -115,7 +115,7 @@ class CustomerDetails extends React.Component {
             <p> 电话：{this.state.customer.telephone}</p>
             <p> 密   码：{this.state.customer.password}</p>
             <p> 状   态：{this.state.customer.status}</p>
-            <img alt="图片找不到..." src={this.state.customer.photo}/>
+            <img width={80} height={80} src={"http://134.175.154.93:8888/group1/"+this.state.customer.photo}/>
           </TabPane>
           <TabPane tab="服务地址" key="2">
             <Table columns={columns} dataSource={this.state.address} />

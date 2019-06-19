@@ -120,6 +120,18 @@ class ProductPage extends React.Component {
   toEarch(record){
     alert(record);
       }
+  //查看所有评论
+  toLook(record){
+    
+    console.log(record);
+    //跳转
+    this.props.history.push({
+      pathname:"/productDetails",
+      payload:record
+    });
+
+
+  }
   // 去添加
   toAdd() {
     // 将默认值置空,模态框打开
@@ -161,14 +173,14 @@ class ProductPage extends React.Component {
 }
     }, {
       title: '操作',
-      width: 180,
+      width: 200,
       align: "center",
       render: (text, record) => {
         return (
           <div>
             <Button type='link' size="small" onClick={this.handleDelete.bind(this, record.id)}>删除</Button>
             <Button type='link' size="small" onClick={this.toEdit.bind(this, record)}>修改</Button>
-            {/* <Button type='link' size="small" onClick={this.toEdit.bind(this, record)}>查看评论</Button> */}
+            <Button type='link' size="small" onClick={this.toLook.bind(this, record)}>查看评论</Button>
           </div>
         )
       }

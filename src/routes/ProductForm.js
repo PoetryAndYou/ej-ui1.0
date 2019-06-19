@@ -1,11 +1,5 @@
 import React from 'react';
-import {  message,
-  Upload,
-  Button,
-  Icon,
-  Form,
-  Modal,
-  Input,
+import {  message,  Upload, Button,  Icon,  Form,  Modal,  Input,
 Select} from 'antd'
 import axios from '../utils/axios'
 

@@ -10,6 +10,8 @@ import WaiterPage from './routes/WaiterPage'
 import AddressPage from './routes/AddressPage'
 import ProductPage from './routes/ProductPage'
 import CustomerDetails from './routes/CustomerDetails'
+import ProductDetails from './routes/ProductDetails'
+
 // import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 import { Layout, Menu, Icon } from 'antd';
 
@@ -97,6 +99,7 @@ const { Header, Content, Sider } = Layout;
         <Route path="/address" exact component={AddressPage} />
         <Route path="/product" exact component={ProductPage} />
         <Route path="/customerDetails" exact component={CustomerDetails} />
+        <Route path="/productDetails" exact component={ProductDetails} />
       </Switch>
         
         </Content>

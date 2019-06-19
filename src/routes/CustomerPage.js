@@ -115,11 +115,7 @@ class CustomerPage extends React.Component {
     this.setState({loading:true});
     axios.get("http://localhost:8888/customer/query",{
       params:{
-        realname: value,
-<<<<<<< HEAD
-=======
-  
->>>>>>> 7f0fb0f84375830cd1b1fa58601c3fe606b6ee35
+        realname: value
       }
     })
     .then((result)=>{
@@ -153,14 +149,25 @@ alert(record);
     // 变量定义
     let columns = [{
       title:'姓名',
+      align:"center",
       dataIndex:'realname'
     },{
       title:'手机号',
+      align:"center",
       dataIndex:'telephone'
     },{
       title:'状态',
       align:"center",
       dataIndex:'status'
+    }, {
+      title: '照片',
+      align: "center",
+      dataIndex: 'photo',
+      render(text){
+        return (
+          <img width={40} height={40} src={"http://134.175.154.93:8888/group1/"+text}/>
+        )
+}
     },{
       title:'操作',
       width:180,
