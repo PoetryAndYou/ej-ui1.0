@@ -5,7 +5,7 @@ import styles from './WaiterPage.css'
 import {Modal,Button, Table,message,Input} from 'antd'
 import axios from '../utils/axios'
 import WaiterForm from './WaiterForm'
-
+import { exportExcel } from 'xlsx-oc'
 
 // 组件类必须要继承React.Component，是一个模块，顾客管理子功能
 class WaiterPage extends React.Component {
@@ -177,6 +177,16 @@ class WaiterPage extends React.Component {
         name: record.name,
       }),
     };
+    const _headers = [
+      { k: 'realname', v: '姓名' }, 
+      { k: 'telephone', v: '手机号' },
+      { k: 'idcard', v: '卡号' }, 
+      { k: 'status', v: '状态' }
+    ];
+        
+    const exportDefaultExcel = () => {
+      exportExcel(_headers, this.state.list);
+    }
     //搜索框
     const Search = Input.Search;
     
@@ -191,7 +201,7 @@ class WaiterPage extends React.Component {
         <div className={styles.btns}>
           <Button onClick={this.toAdd.bind(this)}>添加</Button> &nbsp;
           <Button onClick={this.handleBatchDelete.bind(this)}>批量删除</Button> &nbsp;
-          <Button type="link">导出</Button>
+          <Button onClick={() => exportDefaultExcel()}>导出</Button>
         </div>
         <Table 
           bordered

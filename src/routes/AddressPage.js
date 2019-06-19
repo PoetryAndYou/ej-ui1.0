@@ -4,6 +4,7 @@ import styles from './AddressPage.css'
 import { Modal, Button, Table, message, Input } from 'antd'
 import axios from '../utils/axios'
 import AddressForm from './AddressForm'
+import { exportExcel } from 'xlsx-oc'
 
 //组件类继承React.Component
 class AddressPage extends React.Component {
@@ -169,6 +170,17 @@ class AddressPage extends React.Component {
                 name: record.name,
             }),
         };
+        const _headers = [
+            { k: 'province', v: '省' }, 
+            { k: 'area', v: '区' },
+            { k: 'address', v: '地址' }, 
+            { k: 'telephone', v: '联系电话' }
+          ];
+              
+          const exportDefaultExcel = () => {
+            exportExcel(_headers, this.state.list);
+          }
+
         //搜索框
         const Search = Input.Search;
         //返回结果 jsx(js+xml)
@@ -182,7 +194,7 @@ class AddressPage extends React.Component {
                 <div className={styles.btns}>
                     <Button onClick={this.toAdd.bind(this)}>添加</Button> &nbsp;
                     <Button onClick={this.handleBatchDelete.bind(this)}>批量删除</Button> &nbsp;
-                    <Button type="link">导出</Button>
+                    <Button onClick={() => exportDefaultExcel()}>导出</Button>
                 </div>
                 <Table
                     bordered

@@ -5,7 +5,7 @@ import styles from './CommentPage.css'
 import {Modal,Button, Table,message,Input} from 'antd'
 import axios from '../utils/axios'
 import CommentForm from './CommentForm'
-
+import { exportExcel } from 'xlsx-oc'
 
 // 组件类必须要继承React.Component，是一个模块，评论管理子功能
 class CommentPage extends React.Component {
@@ -168,6 +168,14 @@ class CommentPage extends React.Component {
         name: record.name,
       }),
     };
+    const _headers = [
+      { k: 'content', v: '内容' }, 
+      { k: 'commentTime', v: '评论时间' }
+    ];
+        
+    const exportDefaultExcel = () => {
+      exportExcel(_headers, this.state.list);
+    }
      //搜索框
      const Search = Input.Search;
     
@@ -182,7 +190,7 @@ class CommentPage extends React.Component {
         <div className={styles.btns}>
           <Button onClick={this.toAdd.bind(this)}>添加</Button> &nbsp;
           <Button onClick={this.handleBatchDelete.bind(this)}>批量删除</Button> &nbsp;
-          <Button type="link">导出</Button>
+          <Button onClick={() => exportDefaultExcel()}>导出</Button>
         </div>
         <Table  
           bordered

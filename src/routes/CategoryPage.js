@@ -5,6 +5,7 @@ import styles from './CategoryPage.css'
 import {Modal,Button, Table,message,Input} from 'antd'
 import axios from '../utils/axios'
 import CategoryForm from './CategoryForm'
+import { exportExcel } from 'xlsx-oc'
 
 
 // 组件类必须要继承React.Component，是一个模块，衣服类别管理子功能
@@ -115,8 +116,7 @@ class CategoryPage extends React.Component {
       this.setState({loading:true});
       axios.get("http://localhost:8888/category/query",{
         params:{
-          realname: value,
-         telephone: value,
+          name: value
         }
       })
       .then((result)=>{
@@ -179,6 +179,15 @@ alert(record);
         name: record.name,
       }),
     };
+    const _headers = [
+      { k: 'name', v: '衣服' }, 
+      { k: 'num', v: '数量' }
+    ];
+        
+    const exportDefaultExcel = () => {
+      exportExcel(_headers, this.state.list);
+    }
+
     //搜索框
     const Search = Input.Search;
     
@@ -187,13 +196,13 @@ alert(record);
       <div className={styles.category}>
         <div className={styles.title}>衣服类别管理
         <div  className={styles.search} >
-           <Search placeholder="input search text" onSearch={value => {console.log(value)}} enterButton  />
+           <Search placeholder="input search text" onSearch={value => {this.query(value)}} enterButton  />
            </div>
         </div>
         <div className={styles.btns}>
           <Button onClick={this.toAdd.bind(this)}>添加</Button> &nbsp;
           <Button onClick={this.handleBatchDelete.bind(this)}>批量删除</Button> &nbsp;
-          <Button type="link">导出</Button>
+          <Button onClick={() => exportDefaultExcel()}>导出</Button>
         </div>
         <Table 
           bordered

@@ -2,9 +2,10 @@ import React from 'react';
 // 引入css进行页面美化
 import styles from './OrderPage.css'
 // 导入组件
-import {Modal,Button, Table,message,Input} from 'antd'
+import {Modal,Button, Table,message} from 'antd'
 import axios from '../utils/axios'
 import OrderForm from './OrderForm'
+import { exportExcel } from 'xlsx-oc'
 
 
 
@@ -112,29 +113,6 @@ class OrderPage extends React.Component {
       payload:record
     });
   }
-  
-  query = (value)=>{
-    this.setState({loading:true});
-    axios.get("http://localhost:8888/order/query",{
-      params:{
-        realname: value,
-       telephone: value,
-      }
-    })
-    .then((result)=>{
-      // 将查询数据更新到state中
-      this.setState({list:result.data})
-    })
-    .finally(()=>{
-      this.setState({loading:false});
-    })
-  }
-
-//搜索
-  toEarch(record){
-    alert(record);
-    
-      }
   // 去添加
   toAdd(){
     // 将默认值置空,模态框打开
@@ -182,27 +160,26 @@ class OrderPage extends React.Component {
         name: record.name,
       }),
     };
+    const _headers = [
+      { k: 'orderTime', v: '下单时间' }, 
+      { k: 'total', v: '总价' }
+    ];
+        
+    const exportDefaultExcel = () => {
+      exportExcel(_headers, this.state.list);
+    }
 
-    //搜索框
-    const Search = Input.Search;
-
-    
     // 返回结果 jsx(js + xml)
     return (
 
 
   <div className={styles.order}>
         <div className={styles.title}><div>订单管理</div>
-        {/* sous */}
-            <div  className={styles.search} >
-           <Search placeholder="input search text" onSearch={value => {this.query(value)}} enterButton />
-           </div>
-               
         </div>
         <div className={styles.btns}>
           <Button onClick={this.toAdd.bind(this)}>添加</Button> &nbsp;
           <Button onClick={this.handleBatchDelete.bind(this)}>批量删除</Button> &nbsp;
-          <Button type="link">导出</Button>
+          <Button onClick={() => exportDefaultExcel()}>导出</Button>
         </div>
         <Table 
           bordered

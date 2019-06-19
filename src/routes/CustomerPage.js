@@ -5,6 +5,8 @@ import styles from './CustomerPage.css'
 import {Modal,Button, Table,message,Input} from 'antd'
 import axios from '../utils/axios'
 import CustomerForm from './CustomerForm'
+import { exportExcel } from 'xlsx-oc'
+
 
 
 // 组件类必须要继承React.Component，是一个模块，顾客管理子功能
@@ -194,6 +196,16 @@ alert(record);
         name: record.name,
       }),
     };
+    const _headers = [
+      { k: 'realname', v: '姓名' },
+      { k: 'telephone', v: '手机号' },
+      { k: 'status', v: '状态' }
+    ];
+        
+    const exportDefaultExcel = () => {
+      exportExcel(_headers, this.state.list);
+    }
+
         //搜索框
         const Search = Input.Search;
         
@@ -204,13 +216,13 @@ alert(record);
         
         <div className={styles.title}>顾客管理
         <div  className={styles.search} >
-           <Search placeholder="input search text" onSearch={value => {this.query(value)}} enterButton  />
+           <Search placeholder="请输入姓名" onSearch={value => {this.query(value)}} enterButton  />
            </div>
                </div>
         <div className={styles.btns}>
           <Button onClick={this.toAdd.bind(this)}>添加</Button> &nbsp;
           <Button onClick={this.handleBatchDelete.bind(this)}>批量删除</Button> &nbsp;
-          <Button type="link">导出</Button>
+          <Button onClick={() => exportDefaultExcel()}>导出</Button>
         </div>
         <Table 
           bordered
